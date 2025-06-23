@@ -57,7 +57,7 @@ public class UserService {
         return Optional.ofNullable(userRepository.findByUsername(username));
     }
 
-    public boolean deleteByUsername(String userName) {
+    public boolean deleteUserByUsername(String userName) {
         try{
             userRepository.deleteByUsername(userName);
             return true;

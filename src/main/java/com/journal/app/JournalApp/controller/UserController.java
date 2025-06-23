@@ -38,7 +38,7 @@ public class UserController {
     public ResponseEntity<?> deleteUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
-        userService.deleteByUsername(userName);
+        userService.deleteUserByUsername(userName);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
