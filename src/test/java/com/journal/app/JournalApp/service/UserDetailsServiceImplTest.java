@@ -7,12 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import com.journal.app.JournalApp.entity.User;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.when;
 
+@SpringBootTest
 class UserDetailsServiceImplTest {
 
     @InjectMocks
