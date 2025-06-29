@@ -1,0 +1,58 @@
+spring:
+  data:
+    redis:
+      host: redis-12014.c264.ap-south-1-1.ec2.redns.redis-cloud.com
+      port: 12014
+      password: qOw3SwkhIGWGca4UC6uNk6uHEN6EpY2u
+    mongodb:
+      uri: mongodb+srv://Ruchitn21:Ruchitn21@my-cluster.ikgasdp.mongodb.net/?retryWrites=true&w=majority&appName=my-cluster
+      database: journaldb
+      auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nigam21ruchit@gmail.com
+    password: boxv mevp bmik iiui
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  kafka:
+    bootstrap-servers: pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092
+
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: >
+        org.apache.kafka.common.security.plain.PlainLoginModule required
+        username="NQQJSKKPKFIVOUXC"
+        password="OvzSk8v9FV59GIP1mdQTZ976vgSJ6tle/k1OfAW3GyuZmfHyqShy/3bau5416jbR";
+      session.timeout.ms: 45000
+
+    consumer:
+      group-id: new-weekly-sentiment-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+          spring.json.value.default.type: com.journal.app.JournalApp.model.SentimentData
+          spring.json.trusted.packages: "*"
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+  main:
+    allow-circular-references: true
+
+server:
+  port: 8081
+
+  servlet:
+    context-path: /prod
+
+weather:
+  api:
+    key: abaf3fdc2da7a3d66d2272e9def45199

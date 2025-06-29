@@ -26,7 +26,7 @@
 
     <root level="INFO">
         <appender-ref ref="myConsoleAppender" />
-        <appender-ref ref="myFileAppender" />
+<!--        <appender-ref ref="myFileAppender" />-->
     </root>
 
 

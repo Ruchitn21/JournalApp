@@ -1,0 +1,30 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://Ruchitn21:Ruchitn21@my-cluster.ikgasdp.mongodb.net/?retryWrites=true&w=majority&appName=my-cluster
+      database: journaldb
+      auto-index-creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nigam21ruchit@gmail.com
+    password: boxv mevp bmik iiui
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  main:
+    allow-circular-references: true
+
+server:
+  port: 8080
+
+  servlet:
+    context-path: /dev
+
+weather:
+  api:
+    key: abaf3fdc2da7a3d66d2272e9def45199
