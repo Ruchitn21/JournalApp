@@ -50,8 +50,8 @@ spring:
 server:
   port: ${SERVER_PORT}
 
-  servlet:
-    context-path: /prod
+#  servlet:
+#    context-path: /prod
 
 weather:
   api:
