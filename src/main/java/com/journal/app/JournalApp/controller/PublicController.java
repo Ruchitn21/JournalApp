@@ -35,7 +35,7 @@ public class PublicController {
         return "Journal App is running";
     }
 
-    @PostMapping("/create-user")
+    @PostMapping("/signup")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         try {
             userService.saveNewUser(user);
@@ -43,11 +43,6 @@ public class PublicController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-    }
-
-    @PostMapping("/signup")
-    public void signUp(@RequestBody User user) {
-        userService.saveNewUser(user);
     }
 
     @PostMapping("/login")
