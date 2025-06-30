@@ -1,12 +1,15 @@
 package com.journal.app.JournalApp.service;
 
+import com.journal.app.JournalApp.entity.JournalEntity;
 import com.journal.app.JournalApp.entity.User;
+import com.journal.app.JournalApp.repository.JournalEntryRepository;
 import com.journal.app.JournalApp.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +21,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private JournalEntryRepository journalEntryRepository;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -57,8 +63,13 @@ public class UserService {
         return Optional.ofNullable(userRepository.findByUsername(username));
     }
 
+    @Transactional
     public boolean deleteUserByUsername(String userName) {
         try{
+            List<JournalEntity> journalEntities = userRepository.findByUsername(userName).getJournalEntries();
+            for(JournalEntity journalEntity : journalEntities) {
+                journalEntryRepository.deleteById(journalEntity.getId()); // Remove the user reference from the journal entry
+            }
             userRepository.deleteByUsername(userName);
             return true;
         } catch (Exception e) {

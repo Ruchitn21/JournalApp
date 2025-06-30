@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,6 +27,8 @@ public class UserController {
     @Autowired
     private WeatherService weatherService;
 
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @PutMapping()
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -32,8 +36,14 @@ public class UserController {
         User userInDb = userService.getUserByUsername(userName).orElse(null);
         if(userInDb != null) {
             userInDb.setUsername(user.getUsername());
-            userInDb.setPassword(user.getPassword());
-            userService.saveNewUser(userInDb);
+            userInDb.setPassword(passwordEncoder.encode(user.getPassword()));
+            userInDb.setEmail(user.getEmail()!=null && !user.getEmail().equals("")? user.getEmail() : userInDb.getEmail());
+            userInDb.setJournalEntries(userInDb.getJournalEntries());
+            userInDb.setRoles(userInDb.getRoles());
+            if(user.isSentimentAnalysis()) {
+                userInDb.setSentimentAnalysis(true);
+            }
+            userService.saveUser(userInDb);
             return new ResponseEntity<>(userInDb, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
