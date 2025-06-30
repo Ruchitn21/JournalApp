@@ -1,18 +1,18 @@
 spring:
   data:
     redis:
-      host: redis-12014.c264.ap-south-1-1.ec2.redns.redis-cloud.com
+      host: ${REDIS_HOST}
       port: 12014
-      password: qOw3SwkhIGWGca4UC6uNk6uHEN6EpY2u
+      password: ${REDIS_PASSWORD}
     mongodb:
-      uri: mongodb+srv://Ruchitn21:Ruchitn21@my-cluster.ikgasdp.mongodb.net/?retryWrites=true&w=majority&appName=my-cluster
+      uri: ${MONGODB_URI}
       database: journaldb
       auto-index-creation: true
   mail:
     host: smtp.gmail.com
     port: 587
-    username: nigam21ruchit@gmail.com
-    password: boxv mevp bmik iiui
+    username: ${JAVA_EMAIL}
+    password: ${JAVA_EMAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -20,7 +20,7 @@ spring:
           starttls:
             enable: true
   kafka:
-    bootstrap-servers: pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092
+    bootstrap-servers: ${KAFKA_SERVERS}
 
     properties:
       security.protocol: SASL_SSL
@@ -48,11 +48,11 @@ spring:
     allow-circular-references: true
 
 server:
-  port: 8081
+  port: ${SERVER_PORT}
 
   servlet:
     context-path: /prod
 
 weather:
   api:
-    key: abaf3fdc2da7a3d66d2272e9def45199
+    key: ${WEATHER_API_KEY}
