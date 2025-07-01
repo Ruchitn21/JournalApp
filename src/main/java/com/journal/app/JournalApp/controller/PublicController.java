@@ -4,6 +4,8 @@ import com.journal.app.JournalApp.entity.User;
 import com.journal.app.JournalApp.service.UserDetailsServiceImpl;
 import com.journal.app.JournalApp.service.UserService;
 import com.journal.app.JournalApp.utils.JwtUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("public")
 @Slf4j
+@Tag(name = "Public APIs", description = "APIs that can be operated without authentication")
 public class PublicController {
 
     @Autowired
@@ -31,11 +34,13 @@ public class PublicController {
     private JwtUtil jwtUtil;
 
     @GetMapping("health")
+    @Operation(summary = "Health check endpoint to verify if the application is running")
     public String getHealth() {
         return "Journal App is running";
     }
 
     @PostMapping("/signup")
+    @Operation(summary = "Creates a new user in the system")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         try {
             userService.saveNewUser(user);
@@ -46,6 +51,7 @@ public class PublicController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "Authenticates a user and returns a JWT token")
     public ResponseEntity<String> login(@RequestBody User user) {
         try{
             authenticationManager.authenticate(

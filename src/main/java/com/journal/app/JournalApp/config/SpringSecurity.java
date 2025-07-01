@@ -34,6 +34,12 @@ public class SpringSecurity {
                         .requestMatchers("/public/**").permitAll()
                         .requestMatchers("/journal/**", "/user/**").authenticated()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
+                        ).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)

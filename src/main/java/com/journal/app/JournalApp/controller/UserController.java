@@ -5,6 +5,8 @@ import com.journal.app.JournalApp.entity.User;
 import com.journal.app.JournalApp.repository.UserRepository;
 import com.journal.app.JournalApp.service.UserService;
 import com.journal.app.JournalApp.service.WeatherService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User APIs", description = "APIs related to operations on user")
 public class UserController {
 
     @Autowired
@@ -30,6 +33,7 @@ public class UserController {
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @PutMapping()
+    @Operation(summary = "Updates the user details of an authenticated user")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
@@ -50,6 +54,7 @@ public class UserController {
     }
 
     @DeleteMapping
+    @Operation(summary = "Deletes the user details of an authenticated user")
     public ResponseEntity<?> deleteUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
@@ -58,6 +63,7 @@ public class UserController {
     }
 
     @GetMapping
+    @Operation(summary = "Greets the user authenticated with the weather information")
     public ResponseEntity<?> greeting() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         WeatherResponse weatherResponse = weatherService.getWeather("Mumbai");

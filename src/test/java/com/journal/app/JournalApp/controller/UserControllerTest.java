@@ -37,14 +37,14 @@ public class UserControllerTest {
     private SecurityContext securityContext;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         // Set up security context mocking
         SecurityContextHolder.setContext(securityContext);
         when(securityContext.getAuthentication()).thenReturn(authentication);
     }
 
     @Test
-    public void testUpdateUser_WhenUserExists_ReturnsUpdatedUser() {
+    void testUpdateUser_WhenUserExists_ReturnsUpdatedUser() {
         String username = "testUser";
         User requestUser = new User();
         requestUser.setUsername("newUser");
@@ -65,7 +65,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testUpdateUser_WhenUserNotFound_ReturnsNotFound() {
+    void testUpdateUser_WhenUserNotFound_ReturnsNotFound() {
         String username = "missingUser";
 
         when(authentication.getName()).thenReturn(username);
@@ -78,7 +78,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testDeleteUser_ReturnsNoContent() {
+    void testDeleteUser_ReturnsNoContent() {
         String username = "deleteUser";
 
         when(authentication.getName()).thenReturn(username);
