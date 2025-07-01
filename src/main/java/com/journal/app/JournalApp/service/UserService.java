@@ -1,6 +1,5 @@
 package com.journal.app.JournalApp.service;
 
-import com.journal.app.JournalApp.dto.UserDTO;
 import com.journal.app.JournalApp.entity.JournalEntity;
 import com.journal.app.JournalApp.entity.User;
 import com.journal.app.JournalApp.repository.JournalEntryRepository;
