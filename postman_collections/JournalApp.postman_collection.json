@@ -3,7 +3,8 @@
 		"_postman_id": "c284263e-869a-44e3-be08-c81945223683",
 		"name": "JournalApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "11092019"
+		"_exporter_id": "11092019",
+		"_collection_link": "https://lively-water-644818.postman.co/workspace/acfba6c9-7662-4d5a-8a37-63e1d9625598/collection/11092019-c284263e-869a-44e3-be08-c81945223683?action=share&source=collection_link&creator=11092019"
 	},
 	"item": [
 		{
@@ -83,8 +84,17 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "google login",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
-			]
+			],
+			"description": "APIs that are open to public access and do not require any sort of authentication"
 		},
 		{
 			"name": "admin",
