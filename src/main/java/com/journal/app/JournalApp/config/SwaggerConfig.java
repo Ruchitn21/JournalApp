@@ -25,7 +25,8 @@ public class SwaggerConfig {
                         new Tag().name("Public APIs"),
                         new Tag().name("User APIs"),
                         new Tag().name("Journal APIs"),
-                        new Tag().name("Admin APIs")
+                        new Tag().name("Admin APIs"),
+                        new Tag().name("Google OAuth2")
                 )).addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new Components().addSecuritySchemes(
                         "bearerAuth", new SecurityScheme()
