@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("public")
 @Slf4j
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @Tag(name = "Public APIs", description = "APIs that can be operated without authentication")
 public class PublicController {
 

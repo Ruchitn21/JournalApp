@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/journal")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @Tag(name = "Journal APIs", description = "APIs that can be used to perform operations on journal entries")
 public class JournalEntryController {
 

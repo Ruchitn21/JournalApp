@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @Tag(name = "User APIs", description = "APIs related to operations on user")
 public class UserController {
 

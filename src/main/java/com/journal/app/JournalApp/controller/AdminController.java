@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("admin")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS})
 @Tag(name = "Admin APIs", description = "APIs that can be operated by user having ADMIN role")
 public class AdminController {
 
