@@ -1,0 +1,469 @@
+openapi: 3.0.1
+info:
+  title: Journal App APIs
+  description: "JournalApp is a modern, full-featured personal digital journal application\
+    \ built with Spring Boot and MongoDB. It provides users with a seamless experience\
+    \ for creating, managing, and organizing their personal thoughts, experiences,\
+    \ and daily reflections in a secure and intuitive platform."
+servers:
+  - url: http://localhost:8081
+    description: localhost server
+  - url: https://serene-bayou-95125-b5ba1e9f2f10.herokuapp.com
+    description: production server
+security:
+  - bearerAuth: []
+tags:
+  - name: Admin APIs
+  - name: User APIs
+  - name: Public APIs
+    description: APIs that can be operated without authentication
+  - name: Journal APIs
+    description: APIs that can be used to perform operations on journal entries
+  - name: Google OAuth2
+  - name: Google OAuth2
+    description: APIs for Google OAuth2 authentication
+  - name: Public APIs
+  - name: Admin APIs
+    description: APIs that can be operated by user having ADMIN role
+  - name: User APIs
+    description: APIs related to operations on user
+  - name: Journal APIs
+paths:
+  /user:
+    get:
+      tags:
+        - User APIs
+      summary: Greets the user authenticated with the weather information
+      operationId: greeting
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+        - User APIs
+      summary: Updates the user details of an authenticated user
+      operationId: updateUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/User"
+    delete:
+      tags:
+        - User APIs
+      summary: Deletes the user details of an authenticated user
+      operationId: deleteUser
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /journal/id/{id}:
+    get:
+      tags:
+        - Journal APIs
+      summary: Retrieves a journal entry for a specified id
+      operationId: getJournalEntryById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/JournalEntity"
+    put:
+      tags:
+        - Journal APIs
+      summary: Updates a journal entry for a specified id
+      operationId: updateJournal
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JournalEntity"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/JournalEntity"
+    delete:
+      tags:
+        - Journal APIs
+      summary: Deletes a journal entry for a specified id
+      operationId: deleteJournal
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                enum:
+                  - 100 CONTINUE
+                  - 101 SWITCHING_PROTOCOLS
+                  - 102 PROCESSING
+                  - 103 EARLY_HINTS
+                  - 103 CHECKPOINT
+                  - 200 OK
+                  - 201 CREATED
+                  - 202 ACCEPTED
+                  - 203 NON_AUTHORITATIVE_INFORMATION
+                  - 204 NO_CONTENT
+                  - 205 RESET_CONTENT
+                  - 206 PARTIAL_CONTENT
+                  - 207 MULTI_STATUS
+                  - 208 ALREADY_REPORTED
+                  - 226 IM_USED
+                  - 300 MULTIPLE_CHOICES
+                  - 301 MOVED_PERMANENTLY
+                  - 302 FOUND
+                  - 302 MOVED_TEMPORARILY
+                  - 303 SEE_OTHER
+                  - 304 NOT_MODIFIED
+                  - 305 USE_PROXY
+                  - 307 TEMPORARY_REDIRECT
+                  - 308 PERMANENT_REDIRECT
+                  - 400 BAD_REQUEST
+                  - 401 UNAUTHORIZED
+                  - 402 PAYMENT_REQUIRED
+                  - 403 FORBIDDEN
+                  - 404 NOT_FOUND
+                  - 405 METHOD_NOT_ALLOWED
+                  - 406 NOT_ACCEPTABLE
+                  - 407 PROXY_AUTHENTICATION_REQUIRED
+                  - 408 REQUEST_TIMEOUT
+                  - 409 CONFLICT
+                  - 410 GONE
+                  - 411 LENGTH_REQUIRED
+                  - 412 PRECONDITION_FAILED
+                  - 413 PAYLOAD_TOO_LARGE
+                  - 413 REQUEST_ENTITY_TOO_LARGE
+                  - 414 URI_TOO_LONG
+                  - 414 REQUEST_URI_TOO_LONG
+                  - 415 UNSUPPORTED_MEDIA_TYPE
+                  - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+                  - 417 EXPECTATION_FAILED
+                  - 418 I_AM_A_TEAPOT
+                  - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+                  - 420 METHOD_FAILURE
+                  - 421 DESTINATION_LOCKED
+                  - 422 UNPROCESSABLE_ENTITY
+                  - 423 LOCKED
+                  - 424 FAILED_DEPENDENCY
+                  - 425 TOO_EARLY
+                  - 426 UPGRADE_REQUIRED
+                  - 428 PRECONDITION_REQUIRED
+                  - 429 TOO_MANY_REQUESTS
+                  - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+                  - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+                  - 500 INTERNAL_SERVER_ERROR
+                  - 501 NOT_IMPLEMENTED
+                  - 502 BAD_GATEWAY
+                  - 503 SERVICE_UNAVAILABLE
+                  - 504 GATEWAY_TIMEOUT
+                  - 505 HTTP_VERSION_NOT_SUPPORTED
+                  - 506 VARIANT_ALSO_NEGOTIATES
+                  - 507 INSUFFICIENT_STORAGE
+                  - 508 LOOP_DETECTED
+                  - 509 BANDWIDTH_LIMIT_EXCEEDED
+                  - 510 NOT_EXTENDED
+                  - 511 NETWORK_AUTHENTICATION_REQUIRED
+  /public/signup:
+    post:
+      tags:
+        - Public APIs
+      summary: Creates a new user in the system
+      operationId: addUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/User"
+  /public/login:
+    post:
+      tags:
+        - Public APIs
+      summary: Authenticates a user and returns a JWT token
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /journal:
+    get:
+      tags:
+        - Journal APIs
+      summary: Get all journal entries of a user
+      operationId: getJournalEntries
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/JournalEntity"
+    post:
+      tags:
+        - Journal APIs
+      summary: Adds a journal entry for an authenticated user
+      operationId: addJournal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JournalEntity"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/JournalEntity"
+  /admin/create-admin-user:
+    post:
+      tags:
+        - Admin APIs
+      summary: Creates a user with ADMIN role
+      operationId: createAdminUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+                enum:
+                  - 100 CONTINUE
+                  - 101 SWITCHING_PROTOCOLS
+                  - 102 PROCESSING
+                  - 103 EARLY_HINTS
+                  - 103 CHECKPOINT
+                  - 200 OK
+                  - 201 CREATED
+                  - 202 ACCEPTED
+                  - 203 NON_AUTHORITATIVE_INFORMATION
+                  - 204 NO_CONTENT
+                  - 205 RESET_CONTENT
+                  - 206 PARTIAL_CONTENT
+                  - 207 MULTI_STATUS
+                  - 208 ALREADY_REPORTED
+                  - 226 IM_USED
+                  - 300 MULTIPLE_CHOICES
+                  - 301 MOVED_PERMANENTLY
+                  - 302 FOUND
+                  - 302 MOVED_TEMPORARILY
+                  - 303 SEE_OTHER
+                  - 304 NOT_MODIFIED
+                  - 305 USE_PROXY
+                  - 307 TEMPORARY_REDIRECT
+                  - 308 PERMANENT_REDIRECT
+                  - 400 BAD_REQUEST
+                  - 401 UNAUTHORIZED
+                  - 402 PAYMENT_REQUIRED
+                  - 403 FORBIDDEN
+                  - 404 NOT_FOUND
+                  - 405 METHOD_NOT_ALLOWED
+                  - 406 NOT_ACCEPTABLE
+                  - 407 PROXY_AUTHENTICATION_REQUIRED
+                  - 408 REQUEST_TIMEOUT
+                  - 409 CONFLICT
+                  - 410 GONE
+                  - 411 LENGTH_REQUIRED
+                  - 412 PRECONDITION_FAILED
+                  - 413 PAYLOAD_TOO_LARGE
+                  - 413 REQUEST_ENTITY_TOO_LARGE
+                  - 414 URI_TOO_LONG
+                  - 414 REQUEST_URI_TOO_LONG
+                  - 415 UNSUPPORTED_MEDIA_TYPE
+                  - 416 REQUESTED_RANGE_NOT_SATISFIABLE
+                  - 417 EXPECTATION_FAILED
+                  - 418 I_AM_A_TEAPOT
+                  - 419 INSUFFICIENT_SPACE_ON_RESOURCE
+                  - 420 METHOD_FAILURE
+                  - 421 DESTINATION_LOCKED
+                  - 422 UNPROCESSABLE_ENTITY
+                  - 423 LOCKED
+                  - 424 FAILED_DEPENDENCY
+                  - 425 TOO_EARLY
+                  - 426 UPGRADE_REQUIRED
+                  - 428 PRECONDITION_REQUIRED
+                  - 429 TOO_MANY_REQUESTS
+                  - 431 REQUEST_HEADER_FIELDS_TOO_LARGE
+                  - 451 UNAVAILABLE_FOR_LEGAL_REASONS
+                  - 500 INTERNAL_SERVER_ERROR
+                  - 501 NOT_IMPLEMENTED
+                  - 502 BAD_GATEWAY
+                  - 503 SERVICE_UNAVAILABLE
+                  - 504 GATEWAY_TIMEOUT
+                  - 505 HTTP_VERSION_NOT_SUPPORTED
+                  - 506 VARIANT_ALSO_NEGOTIATES
+                  - 507 INSUFFICIENT_STORAGE
+                  - 508 LOOP_DETECTED
+                  - 509 BANDWIDTH_LIMIT_EXCEEDED
+                  - 510 NOT_EXTENDED
+                  - 511 NETWORK_AUTHENTICATION_REQUIRED
+  /public/health:
+    get:
+      tags:
+        - Public APIs
+      summary: Health check endpoint to verify if the application is running
+      operationId: getHealth
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /auth/google/callback:
+    get:
+      tags:
+        - Google OAuth2
+      operationId: handleGoogleCallback
+      parameters:
+        - name: authCode
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /admin/all-users:
+    get:
+      tags:
+        - Admin APIs
+      summary: Retrieves all users from the database
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+components:
+  schemas:
+    JournalEntity:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/ObjectId"
+        journalName:
+          type: string
+        content:
+          type: string
+        date:
+          type: string
+          format: date-time
+        sentiment:
+          type: string
+          enum:
+            - HAPPY
+            - SAD
+            - ANGRY
+            - ANXIOUS
+    ObjectId:
+      type: object
+      properties:
+        timestamp:
+          type: integer
+          format: int32
+        date:
+          type: string
+          format: date-time
+    User:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/ObjectId"
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        sentimentAnalysis:
+          type: boolean
+        journalEntries:
+          type: array
+          items:
+            $ref: "#/components/schemas/JournalEntity"
+        roles:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      name: Authorization
+      in: header
+      scheme: bearer
+      bearerFormat: JWT
