@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "c284263e-869a-44e3-be08-c81945223683",
+		"name": "JournalApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11092019"
+	},
+	"item": [
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "health-check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/public/health",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"public",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Sarthak21\",\n    \"password\": \"Sarthak21#\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/public/signup",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"public",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Pihu15#\",\n    \"password\": \"Pihu15#\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/public/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"public",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "add admin user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWh1MjEiLCJpYXQiOjE3NTEyNzkzNTUsImV4cCI6MTc1MTMxNTM1NX0.nFtMSot6KiCDzQJaZlcAO4mAhDy_7d8IROM3mUfQNfg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"Vansh21\",\n    \"password\": \"Vansh21#\",\n    \"email\": \"vanshbaba@gmail.com\",\n    \"sentimentAnalysis\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/admin/create-admin-user",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"admin",
+								"create-admin-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWh1MjEiLCJpYXQiOjE3NTEyMTA3NzksImV4cCI6MTc1MTI0Njc3OX0.kJp5QbTAsZnDgOV0KZcdJK2cRHiz4qwAsGnEqtaz3gU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/admin/all-users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"admin",
+								"all-users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "greetings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWh1MTUjIiwiaWF0IjoxNzUxMjg3OTM2LCJleHAiOjE3NTEzMjM5MzZ9.tTVXvf4Qi0jQL_gjyjhTSpl0sZcejUz8uBgurBUpA-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/user",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Sarthak21#",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "Sarthak21",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"SarthakKhare21\",\n    \"password\": \"Sarthak21#\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/user",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJQaWh1MTUjIiwiaWF0IjoxNzUxMjg3OTM2LCJleHAiOjE3NTEzMjM5MzZ9.tTVXvf4Qi0jQL_gjyjhTSpl0sZcejUz8uBgurBUpA-Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/user",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Journal",
+			"item": [
+				{
+					"name": "add journal",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Sarthak21#",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "Sarthak21",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"journalName\": \"Sony Office\",\n    \"content\": \"It was a big office\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{server-port}}/{{context-path}}/journal",
+							"host": [
+								"localhost"
+							],
+							"port": "{{server-port}}",
+							"path": [
+								"{{context-path}}",
+								"journal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all journals",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJSdWNoaXRuMjEiLCJpYXQiOjE3NTEyODgwNTUsImV4cCI6MTc1MTMyNDA1NX0.pBH3R36P7L1fBt0S9vOI0FazX5FcbYsCl7aXVd-tuBA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/journal",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"journal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get journal by id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "update journal by id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Sarthak21#",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "Sarthak21",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"journalName\": \"HSBC Office\",\n    \"content\": \"It is a red color office\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/journal/id/685565c78961d2a04ffb3640",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"id",
+								"685565c78961d2a04ffb3640"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete journal by id",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "Sarthak21#",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "Sarthak21",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/journal/id/68553e4865b3e03eda2f55b2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"journal",
+								"id",
+								"68553e4865b3e03eda2f55b2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
